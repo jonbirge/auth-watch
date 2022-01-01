@@ -1,3 +1,3 @@
 #!/bin/bash
 
-date >> /db/test.txt
+date >> /db/heartbeat

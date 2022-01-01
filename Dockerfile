@@ -3,7 +3,7 @@ FROM ubuntu:18.04
 
 # Updating the packages and installing cron and vim editor if you later want to edit your script from inside your container.
 RUN apt-get update && \
-  apt-get install cron -y
+  apt-get install -y cron octave
 
 # Crontab file copied to cron.d directory.
 COPY ./crontab /etc/cron.d/crontab
