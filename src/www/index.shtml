@@ -13,7 +13,7 @@
   <h3>Data: <!--#echo var="LAST_MODIFIED"--></h3>
   <h3>Last detection: <!--#include file="detect.ssi"--></h3>
 
-  <a href="./stats.cgi">Regenerate</a> plots from <a href="./auth.log">current data</a>
+  <a href="/db/auth.log">Current data</a>
   
   <h2>time-series</h2>
   <p>
