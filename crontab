@@ -1,3 +1,4 @@
 * * * * * /src/heartbeat.sh 2>/proc/1/fd/2
 * * * * * /src/log-tail.sh 2>/proc/1/fd/2
 * * * * * /src/update-db.sh 2>/proc/1/fd/2
+* * * * * /src/update-www.sh 2>/proc/1/fd/2

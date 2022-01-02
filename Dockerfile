@@ -2,7 +2,7 @@ FROM ubuntu:18.04
 
 # Updating the packages and installing cron
 RUN apt-get update && \
-  apt-get install -y cron octave
+  apt-get install -y cron octave whois
 
 # Create mount points
 RUN mkdir /log /db

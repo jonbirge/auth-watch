@@ -1,0 +1,32 @@
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html">
+  <link rel="stylesheet" href="auth.css">
+  <title><!--#echo var = "HTTP_HOST"--> auth</title>
+</head>
+
+<body>
+  <h1>Intrusion statistics: <!--#echo var="HTTP_HOST"--></h1>
+  
+  <h3>Current: <!--#echo var="DATE_LOCAL"--></h3>
+  <h3>Data: <!--#echo var="LAST_MODIFIED"--></h3>
+  <h3>Last detection: <!--#include file="detect.ssi"--></h3>
+
+  <a href="./stats.cgi">Regenerate</a> plots from <a href="./auth.log">current data</a>
+  
+  <h2>time-series</h2>
+  <p>
+    <img border="0" src="hits-all.png" width="640" height="480">
+    <img border="0" src="hits-1d.png" width="640" height="480">
+  </p>
+
+  <h2>statistics</h2>
+  <p>
+    <img border="0" src="hist.png" width="640" height="480">
+    <img border="0" src="ips.png" width="640" height="480">
+  </p>
+
+</body>
+
+</html>
