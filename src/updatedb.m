@@ -43,24 +43,26 @@ maxcnt = max(cnt1);
 [b, c] = counthist(cnt, maxcnt);
 [b30, c30] = counthist(cnt30, maxcnt);
 [b1, c1] = counthist(cnt1, maxcnt);
-thi = ceil(mean(cnt30) + std(cnt30)*4);
-tlow = floor(mean(cnt30) + std(cnt30)*4);
-if cnt1(end) > thi && ~detection
-  matlog('*** detection! ***')
-  detection = true;
-  [ips, ns] = ipcount(d.ip(k1));
-  cc = whoisat(ips{1});
-  msg = sprintf('Attack detected from %s (%s). %d total attempts in %d min.', ...
-    ips{1}, cc, cnt1(end), (24*60)/daybins);
-  % syscall = ['echo "', msg, '" | mail -s "Intrusion attempt" ', params.email];
-  system(syscall);
-else
-  matlog('no detection.')
-  if cnt1(end) < tlow
-    detection = false;
+if ~isempty(cnt30)
+  thi = ceil(mean(cnt30) + std(cnt30)*4);
+  tlow = floor(mean(cnt30) + std(cnt30)*4);
+  if cnt1(end) > thi && ~detection
+    matlog('*** detection! ***')
+    detection = true;
+    [ips, ns] = ipcount(d.ip(k1));
+    cc = whoisat(ips{1});
+    msg = sprintf('Attack detected from %s (%s). %d total attempts in %d min.', ...
+      ips{1}, cc, cnt1(end), (24*60)/daybins);
+    % syscall = ['echo "', msg, '" | mail -s "Intrusion attempt" ', params.email];
+    system(syscall);
+  else
+    matlog('no detection.')
+    if cnt1(end) < tlow
+      detection = false;
+    end
   end
+  detdays = day(cnt > thi);
 end
-detdays = day(cnt > thi);
   
 %%
 

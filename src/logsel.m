@@ -1,11 +1,13 @@
 function dout = logsel(din, procsel, logsel)
+% logsel decides what is an intrusion attempt
 
 if nargin < 2
   procsel = 'sshd';
 end
 
 if nargin < 3
-  logsel = {'Connection closed', 'Received disconnect', 'Disconnecting'};
+  logsel = {'Connection closed', 'Received disconnect', ...
+    'Disconnecting', 'Disconnected', 'Unable to negotiate'};
 end
 if isempty(logsel)
   dologsel = false;
@@ -21,13 +23,14 @@ dout.log = cell(0, 1);
 dout.ip = cell(0, 1);
 k = 1;
 for kin = 1:length(din.date)
-  if mod(kin, 1000) == 0
+  if mod(kin, 100) == 0
     matlog('processing line %d...', kin)
   end
   procstr = din.proc{kin};
   logstr = din.log{kin};
   if strcmp(procsel, procstr)
     if dologsel && any(strincell(logstr, logsel))
+      matlog('intrusion attempt detected at line %d!', kin)
       dout.date(k) = din.date(kin);
       dout.serv{k} = din.serv{kin};
       dout.proc{k} = procstr;

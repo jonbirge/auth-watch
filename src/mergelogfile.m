@@ -83,7 +83,7 @@ matlog('done at line %d', k);
 
 % filtering
 if nfound > 0
-  matlog('sorting new entries...')
+  matlog(['sorting %d new entries...'], num2str(nfound))
   dsorted = sortlog(dnew);
   matlog('filtering new entries...')
   dfilt = logsel(dsorted);
@@ -93,6 +93,7 @@ if nfound > 0
   dout.ip = [din.ip, dfilt.ip];
   newcount = length(dfilt.date);
 else
+  matlog('no new entries.')
   dout = din;
   newcount = 0;
 end
