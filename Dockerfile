@@ -1,11 +1,14 @@
-FROM ubuntu:18.04
+FROM jonbirge/octave:latest
+
+# Deal with Ubuntu's tzdata package stupidity
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Updating the packages and installing cron
 RUN apt-get update && \
-  apt-get install -y cron octave whois fig2dev
+  apt-get install -y cron whois
 
 # Create mount points
-RUN mkdir /log /db
+RUN mkdir /log /db /www
 
 # Crontab file copied to cron.d directory
 COPY ./crontab /etc/cron.d/crontab
