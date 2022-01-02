@@ -1,18 +1,20 @@
-# Pulling ubuntu image with a specific tag from the docker hub.
 FROM ubuntu:18.04
 
-# Updating the packages and installing cron and vim editor if you later want to edit your script from inside your container.
+# Updating the packages and installing cron
 RUN apt-get update && \
   apt-get install -y cron octave
 
-# Crontab file copied to cron.d directory.
+# Create mount points
+RUN mkdir /log /db
+
+# Crontab file copied to cron.d directory
 COPY ./crontab /etc/cron.d/crontab
 RUN chmod 0644 /etc/cron.d/crontab && \
   crontab /etc/cron.d/crontab
 
-# Copy in script file.
-COPY ./logdate.sh /logdate.sh
-RUN chmod +x /logdate.sh
+# Copy in source files
+COPY ./src /src
+RUN chmod -R +x /src/*.sh
 
 # Running commands for the startup of a container.
 ENTRYPOINT ["cron", "-f"]
