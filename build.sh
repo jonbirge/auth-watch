@@ -1,5 +1,5 @@
 #!/bin/bash
 
-docker build --tag jonbirge/authwatch:latest .
+docker build --tag jonbirge/authwatch:dev .
 
-docker push jonbirge/authwatch:latest
+docker push jonbirge/authwatch:dev
